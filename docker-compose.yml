@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  java-app:
+    build: .
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/newsDB
+    tty: true
+    stdin_open: true
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
